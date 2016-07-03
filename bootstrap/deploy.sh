@@ -65,16 +65,6 @@ build_jenkins_server() {
   printf "\nJenkins service up and running on $JENKINS_ADDRESS\n"
 }
 
-initialise_jenkins_pod_properties() {
-  KUBERNETES_MASTER=$(kubectl cluster-info | grep "Kubernetes master" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
-
-  cd $BASE_DIR/kubernetes
-  kubectl delete --ignore-not-found=true configmap cd-config
-  kubectl create configmap cd-config \
-          --from-literal=kubernetes.master=https://$KUBERNETES_MASTER \
-          --from-literal=jenkins.master=$JENKINS_ADDRESS
-}
-
 
 _main() {
 
