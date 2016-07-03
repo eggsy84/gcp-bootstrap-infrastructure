@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: jenkins-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: jenkins-server
+    spec:
+      containers:
+        - name: jenkins-server
+          image: eggsy84/gcp-jenkins-master-k8s-seed:latest
+          env:
+            - name: GCP_PROJECT
+              value: GCP_PROJECT_DEFAULT_VALUE
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
