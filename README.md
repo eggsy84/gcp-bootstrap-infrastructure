@@ -22,7 +22,7 @@ The bootstrap script takes the following arguments:
 4) **NUM_NODES** The number of nodes that should make up your cluster
 
 ```
-cd bootstrap && sh deploy.sh gcp-cd europe-west1-b n1-standard-2 1
+cd bootstrap && sh deploy.sh {project_name} {zone} {machine-type} {number-of-nodes}
 ```
 
 The script will ask you to log in to your Google Account.
