@@ -7,6 +7,7 @@ GCP_PROJECT=${1:-GCP-CD}
 GCP_ZONE=${2:-europe-west1-b}
 GCP_MACHINE_TYPE=${3:-n1-standard-2}
 NUM_NODES=${4:-1}
+SERVICE_ACCOUNT_FILE=${5:-./service_account.json}
 
 validate_environment() {
   # Check pre-requisites for required command line tools
@@ -65,6 +66,22 @@ build_jenkins_server() {
   printf "\nJenkins service up and running on $JENKINS_ADDRESS\n"
 }
 
+initialise_jenkins_pod_properties() {
+  KUBERNETES_MASTER=$(kubectl cluster-info | grep "Kubernetes master" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
+
+  cd $BASE_DIR/kubernetes
+  kubectl delete --ignore-not-found=true configmap cn-config
+  kubectl create configmap cn-config \
+          --from-literal=kubernetes.master=https://$KUBERNETES_MASTER \
+          --from-literal=jenkins.master=$JENKINS_ADDRESS
+}
+
+create_service_account_secret() {
+  printf "\nConfiguring service account k8s secret from $SERVICE_ACCOUNT_FILE\n"
+  kubectl create secret generic gcloud-svc-account --from-file="$SERVICE_ACCOUNT_FILE"
+  printf "Completed service account secret creation\n"
+}
+
 
 _main() {
 
@@ -80,6 +97,9 @@ _main() {
 
   # Push Go CD out on to the cluster
   build_jenkins_server
+
+  # Create k8s secret of Google service account
+  create_service_account_secret
 
   printf "\nCompleted provisioning development environment!!\n\n"
 }

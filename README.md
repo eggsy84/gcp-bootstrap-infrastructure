@@ -22,7 +22,19 @@ The bootstrap script takes the following arguments:
 4) **NUM_NODES** The number of nodes that should make up your cluster
 
 ```
-cd bootstrap && sh deploy.sh {project_name} {zone} {machine-type} {number-of-nodes}
+cd bootstrap && sh deploy.sh {project_name} {zone} {machine-type} {number-of-nodes} {service_account_key}
+```
+
+For example
+
+```
+cd bootstrap && \
+sh deploy.sh \
+my-gcp-project \
+europe-west1-b \
+n1-standard-2 \
+1 \
+/Users/jamesheggs/Downloads/docker-meetup-a08ce8d4d8bc.json
 ```
 
 The script will ask you to log in to your Google Account.
