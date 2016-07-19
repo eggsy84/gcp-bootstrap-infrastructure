@@ -78,7 +78,9 @@ initialise_jenkins_pod_properties() {
 
 create_service_account_secret() {
   printf "\nConfiguring service account k8s secret from $SERVICE_ACCOUNT_FILE\n"
-  kubectl create secret generic gcloud-svc-account --from-file="$SERVICE_ACCOUNT_FILE"
+  cp "$SERVICE_ACCOUNT_FILE" ./gcloud-svc-account.json
+  kubectl create secret generic gcloud-svc-account --from-file=gcloud-svc-account.json
+  rm gcloud-svc-account.json
   printf "Completed service account secret creation\n"
 }
 
