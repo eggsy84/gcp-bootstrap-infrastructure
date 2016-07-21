@@ -34,7 +34,7 @@ my-gcp-project \
 europe-west1-b \
 n1-standard-2 \
 1 \
-/Users/jamesheggs/Downloads/docker-meetup-a08ce8d4d8bc.json
+/somedir/docker-meetup-a08ce8d4d8bc.json
 ```
 
 The script will ask you to log in to your Google Account.
