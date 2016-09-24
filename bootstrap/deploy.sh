@@ -49,10 +49,6 @@ build_jenkins_server() {
   printf "Waiting for public Jenkins ingress point..."
   JENKINS_ADDRESS=''; while [[ "e$JENKINS_ADDRESS" == "e" ]]; do JENKINS_ADDRESS=`kubectl describe service/jenkins-ui 2>/dev/null | grep "LoadBalancer\ Ingress" | cut -f2`; printf "."; done;
 
-  printf "\nConfiguring Jenkins pod properties...\n"
-  initialise_jenkins_pod_properties
-  printf "\nCompleted Jenkins pod property creation\n"
-
   cd $BASE_DIR/kubernetes/jenkins-master
   printf "\nProvisioning Jenkins Pod...\n"
 
@@ -64,16 +60,6 @@ build_jenkins_server() {
   rm jenkins-pod.yaml.bak
 
   printf "\nJenkins service up and running on $JENKINS_ADDRESS\n"
-}
-
-initialise_jenkins_pod_properties() {
-  KUBERNETES_MASTER=$(kubectl cluster-info | grep "Kubernetes master" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
-
-  cd $BASE_DIR/kubernetes
-  kubectl delete --ignore-not-found=true configmap cn-config
-  kubectl create configmap cn-config \
-          --from-literal=kubernetes.master=https://$KUBERNETES_MASTER \
-          --from-literal=jenkins.master=$JENKINS_ADDRESS
 }
 
 create_service_account_secret() {
