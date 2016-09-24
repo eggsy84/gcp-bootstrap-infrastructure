@@ -3,11 +3,10 @@ Starting point for the GCP and K8S Continuous Delivery Seed
 
 ## Introduction
 
-TBC
+Full details on the code and its usage can be found on the corresponding GCP blog:
 
-## Pre-requisites
+https://medium.com/google-cloud/zero-to-continuous-delivery-with-google-cloud-platform-8e3bf1312fb5#.87imb0tqq
 
-TBC
 
 ## Instructions
 
