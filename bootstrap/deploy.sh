@@ -36,6 +36,7 @@ build_gcp_cluster() {
   --num-nodes "$NUM_NODES" \
   --network "default" \
   --username "admin" \
+  --enable-kubernetes-alpha \
   --cluster-version "1.5.2"
 
   gcloud config set container/cluster cd-cluster
