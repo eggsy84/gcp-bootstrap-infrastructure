@@ -35,7 +35,8 @@ build_gcp_cluster() {
   --machine-type "$GCP_MACHINE_TYPE" \
   --num-nodes "$NUM_NODES" \
   --network "default" \
-  --username "admin"
+  --username "admin" \
+  --cluster-version "1.5.2"
 
   gcloud config set container/cluster cd-cluster
   gcloud container clusters get-credentials cd-cluster
