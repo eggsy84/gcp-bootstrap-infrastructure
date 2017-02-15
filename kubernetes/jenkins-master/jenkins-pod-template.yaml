@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: jenkins-server
-          image: eggsy84/gcp-jenkins-master-k8s-seed:latest
+          image: eggsy84/gcp-jenkins-master-k8s-seed:2.32.2-alpine
           env:
             - name: GCP_PROJECT
               value: GCP_PROJECT_DEFAULT_VALUE
