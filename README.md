@@ -43,6 +43,10 @@ a Jenkins master container on to the cluster.
 
 The console will then confirm the actions it is about to take and ask you to press any key to continue.
 
+## Overview
+
+![Overview of process](https://raw.githubusercontent.com/eggsy84/gcp-bootstrap-infrastructure/master/zero-to-cd-on-gcp-diagram_phase1.jpg "Process Overview")
+
 ## IMPORTANT NOTE
 
 This script will provision infrastructure on Google Cloud and you may incur costs for having active infrastructure within the platform
